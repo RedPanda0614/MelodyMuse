@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!-- Always force latest IE rendering engine -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DESCRIPTION">
+    <meta name="keywords" content="KEYWORDS">
+    <meta name="author" content="AUTHOR NAME">
+    <!-- TITLE -->
+    <title>Music Retrieval System</title>
+    <!-- FAVICON -->
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- FONT-AWESOME -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <!-- OWL CAROUSEL -->
+    <link href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" rel="stylesheet">
+<!--    <link href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}" rel="stylesheet">-->
+    <!-- LIGHTBOX -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lightbox.css') }}">
+    <!-- Style CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+
+<body>
+
+<!-- ====== Preloader ======  -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+<!-- ======End Preloader ======  -->
+
+<!-- ======START NAVGITION ======  -->
+<nav class="navbar navbar-expand-lg">
+    <!-- logo -->
+    <!--    <a class="navbar-brand" href="#home">-->
+    <!--        <img src="img/logo.png" alt="header-Logo" class="logo"></a>-->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText">
+        <span class="icon-bar"><i class="fa fa-bars fa-2x"></i></span>
+    </button>
+    <!--End of Resposive Toggle icon-->
+
+    <div class="collapse navbar-collapse" id="navbarText">
+        <!--Main menu navigation list-->
+        <ul class="navbar-nav ml-auto line">
+            <li class="nav-item">
+                <a class="nav-link" href="#home" data-scroll-nav="0">Home</a>
+            </li>
+                        <li class="nav-item">
+                <a class="nav-link" href="#query" data-scroll-nav="1">Query</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#dest" data-scroll-nav="2">Something</a>
+            </li>
+
+        </ul>
+        <!--End of Main menu navigation list-->
+    </div>
+    <!--End of resposive collapse class-->
+</nav>
+<!-- ====== END NAVGITION ======  -->
+
+<!-- =======START HEADER=========== -->
+<header class="home jumbotron" data-paroller-factor="0.5" data-paroller-factor-xs="0.2"
+        data-paroller-factor-sm="-0.2" id="home" data-scroll-index="0">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 home-content mt-md-5 mt-sm-5 text-center">
+                <h1 class="heading-tertiary mb-3">
+                    MelodyMuse
+                </h1>
+                <p class="mb-5">
+                    Discover the rhythm of your soul with our MelodyMuse - where every note becomes a
+                    journey and every melody unlocks a world of sonic wonders. Explore, listen, and let the music find
+                    you.<br> around in circles connect with us.</p>
+                <p class="mb-5">
+                    By 刘斯婕 郭可</p>
+            </div>
+
+        </div>
+    </div>
+</header>
+<!-- ====== END HEADER ======  -->
+
+<!-- Scroll to Top -->
+<div id="scroll-to-top"><i class="fa fa-arrow-up fa-fw"></i></div>
+
+<!-- ====== START QUERY ======  -->
+<section class="subscribe text-center jumbotron" data-paroller-factor="-0.4" data-paroller-factor-sm="-0.2"
+         data-paroller-factor-xs="-0.1" id="query" data-scroll-index="1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="subs-container">
+                    <h2 class="heading-tertiary mb-3">Query Now</h2>
+
+                    <!--                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Id nobis-->
+                    <!--                                            quas sunt suscipit aliquid.</p>-->
+                    <form class="form mt-3" action="query" method="get">
+                        <div class="input-group">
+                            <input name="key" type="text" class="form-control" placeholder="此刻的音乐灵感..."
+                                   required>
+                            <button class="btn" type="submit"><i class="fa fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ======== END QUERY ====== -->
+
+<!-- ====== START DEST ======  -->
+<section class="dest padding" id="dest" data-scroll-index="2">
+    <div class="container">
+
+        <!-- START DEST TITLE -->
+        <h2 class="heading-tertiary text-center">Popular<span> Albums</span></h2>
+        <!-- END DEST TITLE -->
+
+        <!-- START DEST CARD -->
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-10 mx-auto">
+                <div class="card">
+                    <img class="card-img-top" src="{{ url_for('static', filename='img/album1.jpg') }}"
+                         alt="Card image cap">
+                    <div class="text-center">
+                        <p>《唱游》，王菲</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-10 mx-auto">
+                <div class="card">
+                    <img class="card-img-top" src="{{ url_for('static', filename='img/album2.jpg') }}"
+                         alt="Card image cap">
+                    <div class="text-center">
+                        <p>《七里香》，周杰伦</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-10 mx-auto">
+                <div class="card">
+                    <img class="card-img-top" src="{{ url_for('static', filename='img/ablum3.jpg') }}"
+                         alt="Card image cap">
+                    <div class="text-center">
+                        <p>《The Moment》，孙燕姿</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END DEST CARD -->
+
+
+    </div>
+</section>
+<!-- ====== END DEST ======  -->
+
+
+
+
+<!-- ====== JS ======  -->
+<!-- jquery-3.3.1 js -->
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<!-- popper js -->
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<!-- bootstrap js -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<!-- scrollIt js -->
+<script src="{{ url_for('static', filename='js/scrollIt.min.js') }}"></script>
+<!-- countTo js -->
+<script src="{{ url_for('static', filename='js/jquery.countTo.js') }}"></script>
+<!-- filter js -->
+<script src="{{ url_for('static', filename='js/jquery.filterizr.min.js') }}"></script>
+<!-- waypoints js -->
+<script src="{{ url_for('static', filename='js/waypoints.min.js') }}"></script>
+<!-- owl carousel js -->
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+<!-- validator js -->
+<script src="{{ url_for('static', filename='js/validator.js') }}"></script>
+<!-- paroller js -->
+<script src="{{ url_for('static', filename='js/jquery.paroller.min.js') }}"></script>
+<script>$('.jumbotron').paroller();</script>
+<!-- coustom js -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<!-- lightbox js -->
+<script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+
+
+</body>
+</html>

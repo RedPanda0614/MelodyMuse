@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!-- Always force latest IE rendering engine -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DESCRIPTION">
+    <meta name="keywords" content="KEYWORDS">
+    <meta name="author" content="AUTHOR NAME">
+    <!-- TITLE -->
+    <title>Music Retrieval System</title>
+    <!-- FAVICON -->
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- FONT-AWESOME -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <!-- OWL CAROUSEL -->
+    <link href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" rel="stylesheet">
+    <!--    <link href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}" rel="stylesheet">-->
+    <!-- LIGHTBOX -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lightbox.css') }}">
+    <!-- Style CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            /* 浅色梦幻渐变背景 */
+            background: linear-gradient(to right, #f8cdda, rgb(146, 208, 249));
+        }
+
+        .blog-item {
+            /* 半透明的白色背景框 */
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .lyrics-line {
+            /* 歌词样式调整 */
+            color: #333;
+            /* 深色文字，增加可读性 */
+            margin-bottom: 10px;
+        }
+
+        .heading-primary {
+            color: #333;
+            /* 标题颜色调整 */
+        }
+
+    </style>
+</head>
+
+<body>
+<!-- ====== Preloader ======  -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+<!-- ======End Preloader ======  -->
+
+<!-- Scroll to Top -->
+<div id="scroll-to-top"><i class="fa fa-arrow-up fa-fw"></i></div>
+
+<!-- ====== START RESULT ======  -->
+<section class="blog padding" id="blog" data-scroll-index="5">
+    <div class="container">
+        <div class="row">
+
+            <!-- START RESULT SECTION TITLE -->
+
+            <!-- END RESULT SECTION TITLE -->
+            <!-- RESULT ITEM -->
+
+            {% if songs and not people_res%}
+            <div class="text-center">
+                <h2 class="heading-primary mb-5">Song Search Results</h2>
+                <span class="time_zone">Key = {{ key }}，以下是与您查询的语句最相关的歌词结果： </span>
+                <p class="mb-5">O, for a draught of vintage! that hath been
+                Cool'd a long age in the deep-delved earth,
+                Tasting of Flora and the country green,
+                Dance, and Provençal song, and sunburnt mirth!
+                O for a beaker full of the warm South,
+                Full of the true, the blushful Hippocrene,
+                With beaded bubbles winking at the brim,
+                And purple-stained mouth;
+                That I might drink, and leave the world unseen,
+                And with thee fade away into the forest dim:</p>
+<!--                <p class="mb-5">Key = {{ key }}，以下是与您查询的语句最相关的歌词结果：</p>-->
+            </div>
+            {% for song in songs %}
+            
+            <div class="blog-list col-lg-4 col-md-6 col-sm-10 mx-auto">
+                <div class="blog-item">
+                    <div class="post-title">
+                        
+                        <a href="https://music.163.com/#/song?id={{ song['歌曲id'] }}" target="_blank">
+                            <h3>{{ song['歌名'] }}</h3>
+                        </a>
+                    </div>
+                    <span class="time_zone">{{ song['歌手'] }}</span>
+                    <div class="post-content lyrics-center">
+                        {% set lyrics = song['纯歌词'].split('\n') %}
+                        {% set highlight = song['最相关歌词'] %}
+                        {% for line in lyrics[:15] %}
+                        <p class="lyrics-line">
+                            {% if highlight in line %}
+                            {{ line | replace(highlight, '<strong>' + highlight + '</strong>') | safe }}
+                            {% else %}
+                            {{ line }}
+                            {% endif %}
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            {% endfor %}
+
+            {% endif %}
+            <!-- END RESULT ITEM -->
+
+            {% if people_res %}
+            <div class="text-center">
+                <h2 class="heading-primary mb-5">Creator Search Results</h2>
+                <span class="time_zone">Key = {{ key }}，以下是您查询的创作者的合作作品： </span>
+                <p class="mb-5">O, for a draught of vintage! that hath been
+                Cool'd a long age in the deep-delved earth,
+                Tasting of Flora and the country green,
+                Dance, and Provençal song, and sunburnt mirth!
+                O for a beaker full of the warm South,
+                Full of the true, the blushful Hippocrene,
+                With beaded bubbles winking at the brim,
+                And purple-stained mouth;
+                That I might drink, and leave the world unseen,
+                And with thee fade away into the forest dim:</p>
+            </div>
+            {% for result in people_res %}
+
+            <div class="blog-list col-lg-4 col-md-6 col-sm-10 mx-auto">
+                <div class="blog-item">
+                    <div class="post-title">
+                        <a href="#0">
+                            <h3>{{ result[0] }}</h3>
+                        </a>
+                    </div>
+
+                    <div class="post-content">
+                        {% for i in range(result[1]|length) %}
+                        <li>{{ query_list[i] }}在作品中承担<strong>{{ result[1][i]|join(', ') }}</strong></li>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+
+            {% endfor %}
+            {% endif %}
+            <!-- {% if people_res %}
+            <div class="text-center">
+                <h2 class="heading-primary mb-5">Creator Search Results</h2>
+                <span class="time_zone">Key = {{ key }}，以下是您查询的创作者的合作作品： </span>
+                <p class="mb-5">O, for a draught of vintage! that hath been
+                Cool'd a long age in the deep-delved earth,
+                Tasting of Flora and the country green,
+                Dance, and Provençal song, and sunburnt mirth!
+                O for a beaker full of the warm South,
+                Full of the true, the blushful Hippocrene,
+                With beaded bubbles winking at the brim,
+                And purple-stained mouth;
+                That I might drink, and leave the world unseen,
+                And with thee fade away into the forest dim:</p>
+            </div>
+            
+            {% for result in people_res %}
+            <div class="blog-list col-lg-4 col-md-6 col-sm-10 mx-auto">
+                <div class="blog-item">
+                    <div class="post-title">
+                        <a href="#0">
+                            <h3>{{ result[0] }}</h3>
+                        </a>
+                    </div>
+            
+                    <div class="post-content">
+                        {% set category_map = {} %}
+                        {% for i in range(result[1]|length) %}
+                        {% for role in result[1][i] %}
+                        {% if role not in category_map %}
+                        {% set _ = category_map.__setitem__(role, []) %}
+                        {% endif %}
+                        {% set _ = category_map[role].append(query_list[i]) %}
+                        {% endfor %}
+                        {% endfor %}
+            
+                        {% for category, queries in category_map.items() %}
+                        <h4>{{ category }}</h4>
+                        <ul>
+                            {% for query in queries %}
+                            <li>{{ query }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endfor %}
+                    </div>
+            
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %} -->
+
+        </div>
+    </div>
+</section>
+<!-- ====== END RESULT ======  -->
+
+
+<!-- ====== JS ======  -->
+<!-- jquery-3.3.1 js -->
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<!-- popper js -->
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<!-- bootstrap js -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<!-- scrollIt js -->
+<script src="{{ url_for('static', filename='js/scrollIt.min.js') }}"></script>
+<!-- countTo js -->
+<script src="{{ url_for('static', filename='js/jquery.countTo.js') }}"></script>
+<!-- filter js -->
+<script src="{{ url_for('static', filename='js/jquery.filterizr.min.js') }}"></script>
+<!-- waypoints js -->
+<script src="{{ url_for('static', filename='js/waypoints.min.js') }}"></script>
+<!-- owl carousel js -->
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+<!-- validator js -->
+<script src="{{ url_for('static', filename='js/validator.js') }}"></script>
+<!-- paroller js -->
+<script src="{{ url_for('static', filename='js/jquery.paroller.min.js') }}"></script>
+<script>$('.jumbotron').paroller();</script>
+<!-- coustom js -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<!-- lightbox js -->
+<script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+
+
+</body>
+
+</html>
